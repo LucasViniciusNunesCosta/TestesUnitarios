@@ -28,9 +28,9 @@ public class GerenciadoraClientestest {
 		
 		//criacao de clientes ficticios
 		Cliente cliente1 = new Cliente(idCliente1, "Gian", 26, "GianManincor@gmail.com", 21, true);
-		Cliente cliente2 = new Cliente(idCliente2, "Lucas", 9, "LucasVinicius@gmail.com", 20, true);
-		Cliente cliente3 = new Cliente(idCliente3, "Pedro", 20, "Pedro@gmail.com", 19, true);
-		Cliente cliente4 = new Cliente(idCliente4, "Pedro", 80, "Pedro@gmail.com", 19, true);
+		Cliente cliente2 = new Cliente(idCliente2, "Lucas", 19, "LucasVinicius@gmail.com", 20, true);
+		Cliente cliente3 = new Cliente(idCliente3, "Enzo", 9, "Pedro@gmail.com", 19, true);
+		Cliente cliente4 = new Cliente(idCliente4, "José", 80, "Pedro@gmail.com", 19, true);
 		
 		//inserindo os clientes ficticios na lista de clientes do banco
 		List<Cliente> ClientesBanco = new ArrayList<Cliente>();
@@ -63,6 +63,7 @@ public class GerenciadoraClientestest {
 		
 		//verificacao
 		assertTrue(clienteRemovido);
+		assertThat(Gclientes.getClientesDoBanco().size(), Is.is(3));
 		assertNull(Gclientes.pesquisaCliente(idCliente2));
 	}
 	
@@ -77,14 +78,14 @@ public class GerenciadoraClientestest {
 	@Test
 	public void deveVerificarValidadeDeIdadeDentroDoIntervaloPermitido() throws IdadeNaoPermitidaException {
 		
-		Cliente cliente = Gclientes.pesquisaCliente(idCliente3);
+		Cliente cliente = Gclientes.pesquisaCliente(idCliente2);
 		assertTrue(Gclientes.validaIdade(cliente.getIdade()));	
 	}
 	
 	@Test(expected = IdadeNaoPermitidaException.class)
 	public void deveVerificarValidadeDeIdadeForaDoIntervaloPermitido() throws IdadeNaoPermitidaException {
 		
-		Cliente cliente1 = Gclientes.pesquisaCliente(idCliente4);
+		Cliente cliente1 = Gclientes.pesquisaCliente(idCliente3);
 		Cliente cliente2 = Gclientes.pesquisaCliente(idCliente4);
 		Gclientes.validaIdade(cliente1.getIdade());
 		Gclientes.validaIdade(cliente2.getIdade());
